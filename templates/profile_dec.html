@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    Hi {{ current_user.user_name }}!
+    <a href="{{ url_for('create') }}">Create</a>
+    {% endif %}
+    <h1>{% block title %} Passwords {% endblock %}</h1>
+    {% for i in range(len) %}
+        <div class='post'>
+            <h2>{{ saved[i][1] }}</h2>
+            {% if session['master'] %}
+            <p>{{ dec[i].decode("utf-8")}}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

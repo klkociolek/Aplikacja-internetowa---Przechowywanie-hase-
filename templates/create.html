@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Add a New Password {% endblock %}</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="site">Site</label>
+        <br>
+        <input type="text" name="site"
+               placeholder="Site"
+               value="{{ request.form['site'] }}"></input>
+        <br>
+
+        <label for="password">Password</label>
+        <br>
+        <input type="text" name="password"
+               placeholder="password"
+               value="{{ request.form['password'] }}"></input>
+        <br>
+        <button type="submit">Submit</button>
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+    </form>
+{% endblock %}

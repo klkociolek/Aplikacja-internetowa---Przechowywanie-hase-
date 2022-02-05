@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    Hi {{ current_user.user_name }}!
+    <a href="{{ url_for('create') }}">Create</a>
+    {% endif %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <form method="POST" action="/profile">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="master" placeholder="Master password" autofocus="">
+                </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Login</button>
+    </form>
+    <h1>{% block title %} Passwords {% endblock %}</h1>
+    {% for saved in saved %}
+        <div class='post'>
+            <h2>{{ saved['site'] }}</h2>
+            <p>{{ saved['password'].decode("utf-8") }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
